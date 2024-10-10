@@ -162,7 +162,7 @@ Uma vez compilado o circuito, foi testado a funcionalidade do nosso projeto apli
 
 ## Part IV
 
-Para esta parte da prática,foi criado um tipo diferente do módulo de memória apresentado na Part I, no qual há uma porta para fornecer o endereço para uma operação de leitura e uma porta separada que fornece o endereço para uma operação de gravação. Foram executadas as seguintes etapas:
+Para esta parte da prática, foi criado um tipo diferente do módulo de memória apresentado na Part I, no qual há uma porta para fornecer o endereço para uma operação de leitura e uma porta separada que fornece o endereço para uma operação de gravação. Foram executadas as seguintes etapas:
 
 ### 1. Criar um novo projeto no Quartus e gerar o módulo de memória:
    - No **IP Catalog**, foi escolhido o módulo **RAM: 2-PORT** na categoria **Basic Functions > On Chip Memory**.
