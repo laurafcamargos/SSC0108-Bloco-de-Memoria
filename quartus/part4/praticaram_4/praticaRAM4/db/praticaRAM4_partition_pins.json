@@ -1,0 +1,201 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "out0",
+					"strict" : false
+				},
+				{
+					"name" : "out1",
+					"strict" : false
+				},
+				{
+					"name" : "out2",
+					"strict" : false
+				},
+				{
+					"name" : "out3",
+					"strict" : false
+				},
+				{
+					"name" : "out4",
+					"strict" : false
+				},
+				{
+					"name" : "out5",
+					"strict" : false
+				},
+				{
+					"name" : "out6",
+					"strict" : false
+				},
+				{
+					"name" : "ad0",
+					"strict" : false
+				},
+				{
+					"name" : "ad1",
+					"strict" : false
+				},
+				{
+					"name" : "ad2",
+					"strict" : false
+				},
+				{
+					"name" : "ad3",
+					"strict" : false
+				},
+				{
+					"name" : "ad4",
+					"strict" : false
+				},
+				{
+					"name" : "ad5",
+					"strict" : false
+				},
+				{
+					"name" : "ad6",
+					"strict" : false
+				},
+				{
+					"name" : "ad7",
+					"strict" : false
+				},
+				{
+					"name" : "ad10",
+					"strict" : false
+				},
+				{
+					"name" : "ad11",
+					"strict" : false
+				},
+				{
+					"name" : "ad12",
+					"strict" : false
+				},
+				{
+					"name" : "ad14",
+					"strict" : false
+				},
+				{
+					"name" : "ad15",
+					"strict" : false
+				},
+				{
+					"name" : "ad16",
+					"strict" : false
+				},
+				{
+					"name" : "ad17",
+					"strict" : false
+				},
+				{
+					"name" : "ad18",
+					"strict" : false
+				},
+				{
+					"name" : "ad19",
+					"strict" : false
+				},
+				{
+					"name" : "ad20",
+					"strict" : false
+				},
+				{
+					"name" : "ad21",
+					"strict" : false
+				},
+				{
+					"name" : "ad24",
+					"strict" : false
+				},
+				{
+					"name" : "ad25",
+					"strict" : false
+				},
+				{
+					"name" : "ad26",
+					"strict" : false
+				},
+				{
+					"name" : "d_hex1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "d_hex1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "d_hex1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "d_hex1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "d_hex1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "d_hex1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "d_hex1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "WR_SW5",
+					"strict" : false
+				},
+				{
+					"name" : "WR_SW7",
+					"strict" : false
+				},
+				{
+					"name" : "WR_SW4",
+					"strict" : false
+				},
+				{
+					"name" : "WR_SW6",
+					"strict" : false
+				},
+				{
+					"name" : "WR_SW8",
+					"strict" : false
+				},
+				{
+					"name" : "data0",
+					"strict" : false
+				},
+				{
+					"name" : "data1",
+					"strict" : false
+				},
+				{
+					"name" : "data3",
+					"strict" : false
+				},
+				{
+					"name" : "data2",
+					"strict" : false
+				},
+				{
+					"name" : "controle",
+					"strict" : false
+				},
+				{
+					"name" : "relogioclk",
+					"strict" : false
+				},
+				{
+					"name" : "resetar",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

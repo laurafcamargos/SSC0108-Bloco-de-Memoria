@@ -13,6 +13,9 @@
 # Softwares utilizados
 
 Quartus Prime 21.1 <br>
+
+### Visão Geral
+
 Em sistemas computacionais é necessário fornecer uma quantidade substancial de memória. Se um sistema for implementado usando a tecnologia FPGA é possível fornecer alguma quantidade de memória usando os recursos de memória que existem no dispositivo FPGA. Neste exercício examinamos as questões gerais envolvidas na implementação de tais
 memória. Um diagrama do módulo de memória de acesso aleatório (RAM) que implementamos é mostrado na figura abaixo. 
 
@@ -161,181 +164,25 @@ Uma vez compilado o circuito, foi testado a funcionalidade do nosso projeto apli
 
 Para esta parte da prática,foi criado um tipo diferente do módulo de memória apresentado na Part I, no qual há uma porta para fornecer o endereço para uma operação de leitura e uma porta separada que fornece o endereço para uma operação de gravação. Foram executadas as seguintes etapas:
 
-### 1.
+### 1. Criar um novo projeto no Quartus e gerar o módulo de memória:
+   - No **IP Catalog**, foi escolhido o módulo **RAM: 2-PORT** na categoria **Basic Functions > On Chip Memory**.
+   - Depois, escolhido **With one read port and one write port** para configurar a RAM com uma porta de leitura e outra de escrita.
+   - Configurado o tamanho da memória, o método de clock e as portas registradas, assim como na Parte II.
+   - Para a opção **Mixed Port Read-During-Write for Single Input Clock RAM**, foi selecionado **I do not care (The outputs will be undefined)**, permitindo que os dados possam ser novos ou antigos se os endereços de leitura e escrita coincidirem.
+   - Foi feita a inicialização dos valores da memória através da criação de um arquivo `ram32x4.mif`.
 
-| Count | Characters   |
-|-------|--------------|
-| 00    | d E 0        |
-| 01    | E 0 d        |
-| 10    | 0 d E        |
-| 11    | d E 0        |
+### 2. Criar um Arquivo VHDL para instanciar a memória:
+   - Foi criado um arquivo VHDL que instancia o módulo de memória de duas portas.
+   - Adicionado um contador para percorrer os endereços de leitura da memória a cada um segundo.
 
+### 5. Configurar os pinos da FPGA e testar o circuito:
+   - No display de 7 segmentos **HEX0**, é mostrado o conteúdo da memória (em hexadecimal).
+   - No display **HEX3-2** é mostrado o endereço atual através do contador de 1 segundo.
+   - Os switches **SW8-4** mostram o endereço de escrita e **SW3-0** o dado de escrita. O endereço de escrita é exibido em **HEX5-4** e o dado de escrita em **HEX1**.
+   - É feita a sincronização das entradas dos switches ao clock de 50 MHz da FPGA.
 
-### Codigo VHDL:
+ Após testar o circuito os resultados foram: o conteúdo inicial da memória corresponde ao arquivo `ram32x4.mif` e foi possível escrever dados em qualquer endereço da memória usando os switches.
 
-```
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
-use ieee.std_logic_arith.all;
-
-entity DisplayController is
-    port (
-        clk     : in std_logic;
-        rst     : in std_logic;
-		  enb     : in std_logic;
-        seg     : out std_logic_vector(27 downto 0)  -- 7-segment display output
-
-    );
-end DisplayController;
-
-architecture Behavioral of DisplayController is
-    signal tick       : std_logic := '0';
-    signal sec_counter: std_logic_vector(25 downto 0) := (others => '0');
-    signal digit      : std_logic_vector(1 downto 0) := (others => '0');
-begin
-
-    -- 1-second timer
-    process (clk, rst)
-    begin
-        if rst = '1' then
-            sec_counter <= (others => '0');
-            tick <= '0';
-        elsif rising_edge(clk) and enb = '1' then
-            if sec_counter = "10111110101100100000000000" then
-                sec_counter <= (others => '0');
-                tick <= '1';
-            else
-                sec_counter <= sec_counter + 1;
-                tick <= '0';
-            end if;
-        end if;
-    end process;
-
-    -- 2-bit counter
-    process (clk, rst)
-    begin
-        if rst = '1' then
-            digit <= (others => '0');
-        elsif rising_edge(clk) and enb = '1' then
-            if tick = '1' then
-                if digit = "11" then
-                    digit <= (others => '0');
-                else
-                    digit <= digit + 1;
-                end if;
-            end if;
-        end if;
-    end process;
-
-    -- 7-segment display decoder
-    process (digit)
-    begin
-        case digit is
-				when "00" => seg <= "0000001011000010000101111111"; -- 0ed_
-				when "01" => seg <= "1111111000000101100001000010"; -- _0ed
-				when "10" => seg <= "1000010111111100000010110000"; -- d_0e
-				when "11" => seg <= "0110000100001011111110000001"; -- ed_0
-				when others => seg <= (others => '0'); -- default to all segments off (if needed)
-        end case;
-		  -- _ = "1111111"
-		  -- e = "0110000"
-		  -- d = "1000010"
-		  -- 0 = "0000001"
-    end process;
-
-end Behavioral;
-```
-[Link para o projeto implementado no Quartus](quartus/part4/)
-
-## Part V
-Como usamos a FPGA DEO-CV (placa pequena), a palavra é a ser rotacionada nos 6 displays deve ser dE0:
-
-| Count | Character Pattern |
-|-------|-------------------|
-| 000   | d E 0             |
-| 001   | E 0 d             |
-| 010   | 0 d E             |
-| 011   | d E 0             |
-| 100   | E 0 d             |
-| 101   | 0 d E             |
+[Link para o projeto implementado no Quartus](quartus/part3/ram_part3/)
 
 
-### Codigo VHDL:
-
-```
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
-use ieee.std_logic_arith.all;
-
-entity DisplayController is
-    port (
-        clk     : in std_logic;
-        rst     : in std_logic;
-		  enb     : in std_logic;
-        seg     : out std_logic_vector(41 downto 0)  -- 7-segment display output
-    );
-end DisplayController;
-
-architecture Behavioral of DisplayController is
-    signal tick       : std_logic := '0';
-    signal sec_counter: std_logic_vector(25 downto 0) := (others => '0');
-    signal digit      : std_logic_vector(2 downto 0) := (others => '0');
-begin
-
-    -- 1-second timer
-    process (clk, rst, enb)
-    begin
-        if rst = '1' then
-            sec_counter <= (others => '0');
-            tick <= '0';
-        elsif rising_edge(clk) and enb='1' then
-            if sec_counter = "10111110101100100000000000" then
-                sec_counter <= (others => '0');
-                tick <= '1';
-            else
-                sec_counter <= sec_counter + 1;
-                tick <= '0';
-            end if;
-        end if;
-    end process;
-
-    -- 2-bit counter
-    process (clk, rst, enb)
-    begin
-        if rst = '1' then
-            digit <= (others => '0');
-        elsif rising_edge(clk) and enb='1' then
-            if tick = '1' then
-                if digit = "101" then
-                    digit <= (others => '0');
-                else
-                    digit <= digit + 1;
-                end if;
-            end if;
-        end if;
-    end process;
-
-    -- 7-segment display decoder
-    process (digit)
-    begin
-        case digit is
-				when "000" => seg <= "000000101100001000010111111111111111111111"; -- 0ed___
-				when "001" => seg <= "111111100000010110000100001011111111111111"; -- _0ed__
-				when "010" => seg <= "111111111111110000001011000010000101111111"; -- __0ed_
-				when "011" => seg <= "111111111111111111111000000101100001000010"; -- ___0ed
-				when "100" => seg <= "100001011111111111111111111100000010110000"; -- d___0e
-				when "101" => seg <= "011000010000101111111111111111111110000001"; -- ed___0
-				when others => seg <= (others => '0'); -- default to all segments off (if needed)
-        end case;
-		  -- _ = "1111111"
-		  -- e = "0110000"
-		  -- d = "1000010"
-		  -- 0 = "0000001"
-    end process;
-
-end Behavioral;
-
-```
-[Link para o projeto implementado no Quartus](quartus/part5/)
