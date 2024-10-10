@@ -1,0 +1,153 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "hex00",
+					"strict" : false
+				},
+				{
+					"name" : "hex01",
+					"strict" : false
+				},
+				{
+					"name" : "hex02",
+					"strict" : false
+				},
+				{
+					"name" : "hex03",
+					"strict" : false
+				},
+				{
+					"name" : "hex04",
+					"strict" : false
+				},
+				{
+					"name" : "hex05",
+					"strict" : false
+				},
+				{
+					"name" : "hex06",
+					"strict" : false
+				},
+				{
+					"name" : "di1",
+					"strict" : false
+				},
+				{
+					"name" : "di2",
+					"strict" : false
+				},
+				{
+					"name" : "di3",
+					"strict" : false
+				},
+				{
+					"name" : "di4",
+					"strict" : false
+				},
+				{
+					"name" : "di5",
+					"strict" : false
+				},
+				{
+					"name" : "di6",
+					"strict" : false
+				},
+				{
+					"name" : "di0",
+					"strict" : false
+				},
+				{
+					"name" : "ad0",
+					"strict" : false
+				},
+				{
+					"name" : "ad1",
+					"strict" : false
+				},
+				{
+					"name" : "ad2",
+					"strict" : false
+				},
+				{
+					"name" : "ad3",
+					"strict" : false
+				},
+				{
+					"name" : "ad4",
+					"strict" : false
+				},
+				{
+					"name" : "ad5",
+					"strict" : false
+				},
+				{
+					"name" : "ad6",
+					"strict" : false
+				},
+				{
+					"name" : "ad7",
+					"strict" : false
+				},
+				{
+					"name" : "ad10",
+					"strict" : false
+				},
+				{
+					"name" : "ad11",
+					"strict" : false
+				},
+				{
+					"name" : "ad12",
+					"strict" : false
+				},
+				{
+					"name" : "datain3",
+					"strict" : false
+				},
+				{
+					"name" : "datain2",
+					"strict" : false
+				},
+				{
+					"name" : "datain1",
+					"strict" : false
+				},
+				{
+					"name" : "datain0",
+					"strict" : false
+				},
+				{
+					"name" : "a1",
+					"strict" : false
+				},
+				{
+					"name" : "a3",
+					"strict" : false
+				},
+				{
+					"name" : "a0",
+					"strict" : false
+				},
+				{
+					"name" : "a2",
+					"strict" : false
+				},
+				{
+					"name" : "a4",
+					"strict" : false
+				},
+				{
+					"name" : "wte",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

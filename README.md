@@ -23,18 +23,24 @@ memória. Um diagrama do módulo de memória de acesso aleatório (RAM) que impl
 Esse diagrama contém 32 palavras (linhas) de quatro bits, que são acessadas usando uma porta de endereço de cinco bits, uma porta de dados de quatro bits e um controle de gravação entrada. Neste exercício usamos a FPGA Cyclone V DE0-CV que possui blocos M10K, onde cada bloco contém 10.240 bits de memória. Um termo comum usado para especificar o tamanho de uma memória é sua proporção de aspecto, que fornece a profundidade em palavras e a largura em bits (profundidade x largura). Neste exercício, usaremos uma proporção de aspecto de quatro bits de largura e usaremos apenas as primeiras 32 palavras na memória.
 
 ## Part I
-### 1. 
-Implementamos o circuito com portas lógicas e geramos o arquivo vhdl a partir dele:
 
-
-Captura de tela durante a compilação do circuito que mostra quantos elementos lógicos e quantos registradores são utilizados:
+Estruturas lógicas comumente usadas, como somadores, registradores, contadores e memórias, podem ser implementadas em um chip FPGA usando módulos pré-construídos que são fornecidos em bibliotecas. Neste exercício, usaremos tal módulo para implementar a memória mostrada na figura abaixo:
 
 <div align ="center">
-    <img src ="src/logic_elements_part1.png" style="max-width: 100%;" alt="logic_elements_part1">
+    <img src ="src/ramPart1.png" style="max-width: 100%;" alt="rampart1">
 </div>
 
+### Arquivo VHDL ram32x4.vhd:
 
-[Link para o projeto implementado no Quartus](quartus/part1/)
+```
+ENTITY ram32x4 IS
+PORT ( address : IN STD_LOGIC_VECTOR (4 DOWNTO 0);
+clock : IN STD_LOGIC := ’1’;
+data : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
+wren : IN STD_LOGIC ;
+q : OUT STD_LOGIC_VECTOR (3 DOWNTO 0) );
+END ram32x4;
+```
 
 ### 2.
 ![Simulação do circuito no Quartus](src/simulacao1.PNG "Simulação do circuito no Quartus")
@@ -56,40 +62,7 @@ A diferença observada na implementação de um circuito de 4 bits no Quartus em
 	
 ## Part II
 
-### Codigo VHDL:
 
-```
-LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
-
-ENTITY contador16b IS
-    PORT (
-        CLK : IN STD_LOGIC;
-        T   : IN STD_LOGIC;
-        Q   : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-        CLR : IN STD_LOGIC
-    );
-END CONTADOR16B;
-
-ARCHITECTURE BEHAVIORAL OF contador16b IS
-    SIGNAL count : UNSIGNED(15 DOWNTO 0);
-BEGIN
-    PROCESS (CLK, CLR)
-    BEGIN
-        IF CLR = '0' THEN
-            count <= (OTHERS => '0'); -- Reset the count
-        ELSIF RISING_EDGE(CLK) THEN
-            IF T = '1' THEN
-                count <= count + 1;
-            END IF;
-        END IF;
-    END PROCESS;
-    
-    Q <= STD_LOGIC_VECTOR(count);
-END BEHAVIORAL;
-
-```
 <div align ="center">
     <img src ="src/rtl_part2.png" style="max-width: 100%;" alt="img1">
 </div>
